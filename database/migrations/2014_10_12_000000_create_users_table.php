@@ -22,11 +22,10 @@ return new class extends Migration
             $table->enum('role', ['admin', 'patient', 'doctor']);
             $table->string('Address')->nullable();
             $table->string('CIN')->nullable();
-            $table->integer('phone')->nullable();
-            $table->string('photo')->nullable();
+            $table->string('photo')->default('profile.png');
             $table->rememberToken();
             $table->timestamps();
-        });
+        });;
     }
 
     /**

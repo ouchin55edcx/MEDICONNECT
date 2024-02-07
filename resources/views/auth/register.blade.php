@@ -37,12 +37,19 @@
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
 
+        <div class="mt-4">
+            <x-input-label for="genre" :value="__('Genre')" />
+            <select id="genre" name="genre" class="block mt-1 w-full" required>
+                <option value="Homme">Homme</option>
+                <option value="Femme">Femme</option>
+            </select>
+        </div>
+
         <!-- Role -->
         <div class="mt-4">
             <x-input-label for="role" :value="__('Role')" />
             <select id="role" name="role" class="block mt-1 w-full" required onchange="toggleAdditionalFields()">
                 <option value="">Select Role</option>
-                <option value="admin">Admin</option>
                 <option value="doctor">Doctor</option>
                 <option value="patient">Patient</option>
             </select>
@@ -58,27 +65,12 @@
                 <x-input-error :messages="$errors->get('CIN')" class="mt-2" />
             </div>
 
-            <!-- Phone -->
-            <div class="mt-4">
-                <x-input-label for="phone" :value="__('Phone')" />
-                <x-text-input id="phone" class="block mt-1 w-full" type="text" name="phone" :value="old('phone')" autocomplete="phone" />
-                <x-input-error :messages="$errors->get('phone')" class="mt-2" />
-            </div>
 
             <!-- Address -->
             <div class="mt-4">
                 <x-input-label for="Address" :value="__('Address')" />
                 <x-text-input id="Address" class="block mt-1 w-full" type="text" name="Address" :value="old('Address')" autocomplete="Address" />
                 <x-input-error :messages="$errors->get('Address')" class="mt-2" />
-            </div>
-
-            <!-- Genre -->
-            <div class="mt-4">
-                <x-input-label for="genre" :value="__('Genre')" />
-                <select id="genre" name="genre" class="block mt-1 w-full" required>
-                    <option value="Homme">Homme</option>
-                    <option value="Femme">Femme</option>
-                </select>
             </div>
 
             <!-- Photo -->

@@ -39,20 +39,18 @@ class RegisteredUserController extends Controller
             'role' => ['required', Rule::in(['admin', 'patient', 'doctor'])],
             'Address' => ['nullable', 'string', 'max:255'],
             'CIN' => ['nullable', 'string', 'max:255'],
-            'phone' => ['nullable', 'string', 'max:255'],
             'genre' => ['nullable', Rule::in(['Homme', 'Femme'])],
         ]);
 
         $user = User::create([
-            'firstName' => $request->firstName, // Corrected attribute name
-            'lastName' => $request->lastName, // Corrected attribute name
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'role' => $request->role,
-            'Address' => $request->Address,
-            'CIN' => $request->CIN,
-            'phone' => $request->phone,
-            'genre' => $request->genre,
+            'firstName' => $request->input('firstName'),
+            'lastName' => $request->input('lastName'),
+            'email' => $request->input('email'),
+            'password' => Hash::make($request->input('password')),
+            'role' => $request->input('role'),
+            'Address' => $request->input('Address'),
+            'CIN' => $request->input('CIN'),
+            'genre' => $request->input('genre'),
         ]);
 
         event(new Registered($user));
