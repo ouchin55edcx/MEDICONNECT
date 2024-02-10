@@ -14,9 +14,12 @@ class SpecialtyController extends Controller
     {
         // Fetch specialties from the database
         $specialties = Specialty::all();
-
+        $totalSpecialties = Specialty::count();
+        
+        // Example: Get the count of specialties created in the last 30 days
+        $specialtiesCreatedLast30Days = Specialty::where('created_at', '>=', now()->subDays(30))->count();
         // Pass the specialties to the view
-        return view('admin.dashboard', ['specialties' => $specialties]);
+        return view('admin.dashboard', ['specialties' => $specialties],compact('totalSpecialties', 'specialtiesCreatedLast30Days'));
     }
     /**
      * Show the form for creating a new resource.
@@ -53,15 +56,29 @@ class SpecialtyController extends Controller
      */
     public function edit(Specialty $specialty)
     {
-        //
+        return view('specialties.edit', compact('specialty'));
     }
 
     /**
      * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Specialty  $specialty
+     * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Specialty $specialty)
     {
-        //
+        $request->validate([
+            'specialtyName' => 'required|string|max:255',
+            // Add any other validation rules as needed
+        ]);
+
+        $specialty->update([
+            'specialtyName' => $request->input('specialtyName'),
+            // Update any other fields as needed
+        ]);
+
+        return redirect()->back();
     }
 
     /**
