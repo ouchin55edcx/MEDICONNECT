@@ -69,6 +69,10 @@ class SpecialtyController extends Controller
      */
     public function destroy(Specialty $specialty)
     {
-        //
+        // Delete the specialty
+        $specialty->delete();
+
+        // Redirect back or return a response as needed
+        return redirect()->route('dashboard');
     }
 }

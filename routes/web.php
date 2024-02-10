@@ -33,3 +33,4 @@ require __DIR__ . '/auth.php';
 
 Route::get('/dashboard', [SpecialtyController::class, 'index'])->name('dashboard');
 Route::post('/add-specialty', [SpecialtyController::class, 'create'])->name('addSpecialty');
+Route::delete('/specialties/{specialty}', [SpecialtyController::class, 'destroy'])->name('specialties.destroy');

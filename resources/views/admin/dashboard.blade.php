@@ -77,9 +77,15 @@
                         <button class="button bg-yellow-500 text-white hover:bg-yellow-700 px-3 py-1 rounded">
                             Edit
                         </button>
-                        <button class="button bg-red-500 text-white hover:bg-red-700 px-3 py-1 rounded">
-                            Delete
-                        </button>
+                        <form action="{{ route('specialties.destroy', $specialty) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                        
+                            <button type="submit" class="button bg-red-500 text-white hover:bg-red-700 px-3 py-1 rounded">
+                                Delete
+                            </button>
+                        </form>
+                        
                     </div>
                 </div>
             </div>
