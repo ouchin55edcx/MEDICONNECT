@@ -1,11 +1,9 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SpecialtyController;
+use App\Models\Specialty;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DoctorController;
-use App\Http\Controllers\PatientController;
-
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,7 +20,7 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('admin.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -31,8 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
-Route::get('/doctor/dashboard', [DoctorController::class, 'DoctorDashboard'])->name('doctor.dashboard');
-Route::get('/patient/home', [PatientController::class, 'PatientHome'])->name('patient.home');
-
+Route::get('/dashboard', [SpecialtyController::class, 'index'])->name('dashboard');
+Route::post('/add-specialty', [SpecialtyController::class, 'create'])->name('addSpecialty');
