@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SpecialtyController;
 use App\Http\Controllers\MedicamentController;
+use App\Http\Controllers\DoctorController;
+
 
 use App\Models\Medicament;
 use App\Models\Specialty;
@@ -34,15 +36,25 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__ . '/auth.php';
 
+
+// specialty route doctor route 
 Route::get('/dashboard', [SpecialtyController::class, 'index'])->name('dashboard');
 Route::post('/add-specialty', [SpecialtyController::class, 'create'])->name('addSpecialty');
 Route::delete('/specialties/{specialty}', [SpecialtyController::class, 'destroy'])->name('specialties.destroy');
 Route::get('/specialties/{specialty}/edit', [SpecialtyController::class, 'edit'])->name('specialties.edit');
 Route::put('/specialties/{specialty}', [SpecialtyController::class, 'update'])->name('specialties.update');
 
-// Route::get('/dashboard', [MedicamentController::class, 'index'])->name('dashboard');
 
+
+// medicament route 
+// Route::get('/dashboard', [MedicamentController::class, 'index'])->name('dashboard');
 Route::post('/add-Medicament', [MedicamentController::class, 'create'])->name('addMedicament');
 Route::delete('/Medicaments/{medicament}', [MedicamentController::class, 'destroy'])->name('medicaments.destroy');
 Route::get('/medicaments/{medicament}/edit', [MedicamentController::class, 'edit'])->name('medicaments.edit');
 Route::put('/medicaments/{medicament}', [MedicamentController::class, 'update'])->name('medicaments.update');
+
+
+// doctor route 
+
+
+Route::get('/doctors', [DoctorController::class, 'index'])->name('doctor.doctors');
