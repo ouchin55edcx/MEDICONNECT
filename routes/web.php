@@ -4,6 +4,9 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SpecialtyController;
 use App\Http\Controllers\MedicamentController;
 use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\PatientController;
+use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\DoctorProfileController;
 
 
 use App\Models\Medicament;
@@ -55,7 +58,11 @@ Route::put('/medicaments/{medicament}', [MedicamentController::class, 'update'])
 
 
 // doctor route 
-
-
 Route::get('/doctors', [DoctorController::class, 'index'])->name('doctor.doctors');
-Route::post('/add-medication', [DoctorController::class,'create'])->name('addMedication');
+Route::post('/add-medication', [DoctorController::class, 'create'])->name('addMedication');
+
+
+// Patient route 
+Route::get('/patient', [PatientController::class, 'index'])->name('patient.patient');
+Route::get('/appointment', [AppointmentController::class, 'index'])->name('patient.appointment');
+Route::get('/doctor_profile', [DoctorProfileController::class, 'index'])->name('patient.doctor_profile');
