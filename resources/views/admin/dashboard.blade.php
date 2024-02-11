@@ -141,12 +141,28 @@
                 <!-- Add New Specialty Button -->
                 <form id="addMedicamentForm" action="{{ route('addMedicament') }}" method="POST" class="mb-4">
                     @csrf
-                    <input type="text" name="newMedicament" placeholder="New Medicament"
-                        class="input px-4 py-2 border border-gray-300 rounded mr-2">
-                    <button class="button bg-blue-500 text-white hover:bg-blue-700 px-4 py-2 rounded">
+
+                    <div class="mb-4">
+                        <label for="newMedicament" class="block text-sm font-medium text-gray-700">New
+                            Medicament:</label>
+                        <input type="text" name="newMedicament" id="newMedicament" placeholder="Enter new medicament"
+                            class="input">
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="specialty" class="block text-sm font-medium text-gray-700">Specialty:</label>
+                        <select id="specialty" name="specialty" class="input">
+                            @foreach ($specialties as $specialty)
+                                <option value="{{ $specialty->id }}">{{ $specialty->specialtyName }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <button type="submit" class="button bg-blue-500 text-white hover:bg-blue-700 px-4 py-2 rounded">
                         Add New Medicament
                     </button>
                 </form>
+
 
                 @foreach ($medicaments as $medicament)
                     <div x-data="{ showModal: false, editedMedicament: '{{ $medicament->medicamentName }}' }">
