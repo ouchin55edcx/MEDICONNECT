@@ -3,27 +3,28 @@
 namespace App\Http\Controllers;
 
 use App\Models\Specialty;
+use App\Models\Medicament;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class SpecialtyController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        // Fetch specialties from the database
-        $specialties = Specialty::all();
-        $totalSpecialties = Specialty::count();
-        
-        // Example: Get the count of specialties created in the last 30 days
-        $specialtiesCreatedLast30Days = Specialty::where('created_at', '>=', now()->subDays(30))->count();
-        // Pass the specialties to the view
-        return view('admin.dashboard', ['specialties' => $specialties],compact('totalSpecialties', 'specialtiesCreatedLast30Days'));
-    }
-    /**
-     * Show the form for creating a new resource.
-     */
+public function index()
+{
+    $specialties = Specialty::all();
+    $medicaments = Medicament::all();
+    $totalSpecialties = Specialty::count();
+
+    // Fetch user statistics
+    $totalUsers = User::count();
+    $totalMedicament = Medicament::count();
+
+    return view('admin.dashboard', compact('specialties', 'totalSpecialties', 'totalUsers', 'totalMedicament','medicaments'));
+}
+
+    
+    
+
     public function create(Request $request)
     {
         $newSpecialtyName = $request->input('newSpecialty');
@@ -35,37 +36,11 @@ class SpecialtyController extends Controller
         return redirect()->route('dashboard');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Specialty $specialty)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Specialty $specialty)
     {
         return view('specialties.edit', compact('specialty'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Specialty  $specialty
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Specialty $specialty)
     {
         $request->validate([
@@ -78,12 +53,9 @@ class SpecialtyController extends Controller
             // Update any other fields as needed
         ]);
 
-        return redirect()->back();
+        return redirect()->route('dashboard');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Specialty $specialty)
     {
         // Delete the specialty
