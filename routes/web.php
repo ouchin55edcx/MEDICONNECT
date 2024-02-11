@@ -58,3 +58,4 @@ Route::put('/medicaments/{medicament}', [MedicamentController::class, 'update'])
 
 
 Route::get('/doctors', [DoctorController::class, 'index'])->name('doctor.doctors');
+Route::post('/add-medication', [DoctorController::class,'create'])->name('addMedication');
