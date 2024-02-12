@@ -15,15 +15,22 @@ class MedicamentController extends Controller
     {
         $request->validate([
             'newMedicament' => 'required|string|max:255',
+            'specialty' => 'required|exists:Specialty,id', 
         ]);
-
+    
         $newMedicamentName = $request->input('newMedicament');
-
-        // Ensure the column name matches your model
-        Medicament::create(['medicamentName' => $newMedicamentName]);
-
+        $specialtyId = $request->input('specialty');
+    
+        // Ensure the column names match your model
+        Medicament::create([
+            'medicamentName' => $newMedicamentName,
+            'specialty_id' => $specialtyId,
+        ]);
+    
         return redirect()->route('dashboard');
     }
+    
+    
 
     public function edit(Medicament $Medicament)
     {
